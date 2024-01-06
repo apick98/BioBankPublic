@@ -26,6 +26,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/adampick/Projects/BioBank/BioBank
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/adampick/Projects/BioBank/BioBank/Pages/Collections/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29sbGVjdGlvbnMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/adampick/Projects/BioBank/BioBank/Pages/Collections/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29sbGVjdGlvbnMvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/adampick/Projects/BioBank/BioBank/Pages/Collections/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29sbGVjdGlvbnMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/adampick/Projects/BioBank/BioBank/Pages/Collections/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29sbGVjdGlvbnMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/adampick/Projects/BioBank/BioBank/Pages/Collections/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29sbGVjdGlvbnMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/adampick/Projects/BioBank/BioBank/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

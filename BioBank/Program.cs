@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using BioBank.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<BioBankContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("BioBankContext") ?? throw new InvalidOperationException("Connection string 'BioBankContext' not found.")));
 
 var app = builder.Build();
 
