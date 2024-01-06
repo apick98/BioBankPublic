@@ -23,7 +23,7 @@ namespace BioBank.Pages.Collections
 
         public async Task OnGetAsync()
         {
-            Collection = await _context.Collection.ToListAsync();
+            Collection = await _context.Collections.ToListAsync();
         }
     }
 }

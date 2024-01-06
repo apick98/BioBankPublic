@@ -29,7 +29,7 @@ namespace BioBank.Pages.Collections
                 return NotFound();
             }
 
-            var collection = await _context.Collection.FirstOrDefaultAsync(m => m.ID == id);
+            var collection = await _context.Collections.FirstOrDefaultAsync(m => m.ID == id);
 
             if (collection == null)
             {
@@ -49,11 +49,11 @@ namespace BioBank.Pages.Collections
                 return NotFound();
             }
 
-            var collection = await _context.Collection.FindAsync(id);
+            var collection = await _context.Collections.FindAsync(id);
             if (collection != null)
             {
                 Collection = collection;
-                _context.Collection.Remove(Collection);
+                _context.Collections.Remove(Collection);
                 await _context.SaveChangesAsync();
             }
 

@@ -30,7 +30,7 @@ namespace BioBank.Pages.Collections
                 return NotFound();
             }
 
-            var collection =  await _context.Collection.FirstOrDefaultAsync(m => m.ID == id);
+            var collection =  await _context.Collections.FirstOrDefaultAsync(m => m.ID == id);
             if (collection == null)
             {
                 return NotFound();
@@ -71,7 +71,7 @@ namespace BioBank.Pages.Collections
 
         private bool CollectionExists(int id)
         {
-            return _context.Collection.Any(e => e.ID == id);
+            return _context.Collections.Any(e => e.ID == id);
         }
     }
 }

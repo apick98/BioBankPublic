@@ -35,7 +35,7 @@ namespace BioBank.Pages.Collections
                 return Page();
             }
 
-            _context.Collection.Add(Collection);
+            _context.Collections.Add(Collection);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

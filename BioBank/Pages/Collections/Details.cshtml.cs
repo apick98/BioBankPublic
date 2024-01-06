@@ -28,7 +28,7 @@ namespace BioBank.Pages.Collections
                 return NotFound();
             }
 
-            var collection = await _context.Collection.FirstOrDefaultAsync(m => m.ID == id);
+            var collection = await _context.Collections.FirstOrDefaultAsync(m => m.ID == id);
             if (collection == null)
             {
                 return NotFound();
