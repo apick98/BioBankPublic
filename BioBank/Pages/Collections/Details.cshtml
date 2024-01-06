@@ -23,6 +23,28 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Collection.Title)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Collection.Samples)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Donor Count</th>
+                    <th>Material Type</th>
+                </tr>
+                @foreach (var item in Model.Collection.Samples)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DonorCount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaterialType)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <div>
