@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<BioBankContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("BioBankContext") ?? throw new InvalidOperationException("Connection string 'BioBankContext' not found.")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("BioBankContextSQLite") ?? throw new InvalidOperationException("Connection string 'BioBankContext' not found.")));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
