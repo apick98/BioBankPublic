@@ -27,18 +27,21 @@ namespace BioBank.Pages.Collections
         [BindProperty]
         public Collection Collection { get; set; } = default!;
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            var emptyCollection = new Collection { DiseaseTerm = string.Empty, Title = string.Empty};
+
+            if (await TryUpdateModelAsync<Collection>(
+                emptyCollection,
+                "collection",
+                s => s.DiseaseTerm, s => s.Title))
             {
-                return Page();
+                _context.Collections.Add(emptyCollection);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
 
-            _context.Collections.Add(Collection);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            return Page();
         }
     }
 }
