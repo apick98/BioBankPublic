@@ -31,7 +31,7 @@ using (var scope = app.Services.CreateScope())
 
     var context = services.GetRequiredService<BioBankContext>();
     context.Database.EnsureCreated();
-    // DbInitializer.Initialize(context);
+    DbInitialiser.Initialise(context);
 }
 
 app.UseHttpsRedirection();
