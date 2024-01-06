@@ -30,43 +30,34 @@ namespace BioBank.Pages.Collections
                 return NotFound();
             }
 
-            var collection =  await _context.Collections.FirstOrDefaultAsync(m => m.ID == id);
-            if (collection == null)
+            Collection = await _context.Collections.FindAsync(id);
+
+            if (Collection == null)
             {
                 return NotFound();
             }
-            Collection = collection;
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (!ModelState.IsValid)
+            var collectionToUpdate = await _context.Collections.FindAsync(id);
+
+            if (collectionToUpdate == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Collection).State = EntityState.Modified;
-
-            try
+            if (await TryUpdateModelAsync<Collection>(
+                collectionToUpdate,
+                "collection",
+                s => s.DiseaseTerm, s => s.Title))
             {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CollectionExists(Collection.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
+            return Page();
         }
 
         private bool CollectionExists(int id)

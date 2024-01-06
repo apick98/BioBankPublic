@@ -1,11 +1,8 @@
 ﻿<Properties StartupConfiguration="{BCA1DD4D-C10C-4C0E-830A-78C97A9D90A4}|https">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Pages/Collections/Create.cshtml.cs">
     <Files>
-      <File FileName="Data/DBInitialiser.cs" Line="39" Column="6" />
-      <File FileName="Models/Sample.cs" Line="1" Column="1" />
+      <File FileName="Pages/Collections/Create.cshtml.cs" Line="23" Column="10" />
       <File FileName="Models/Collection.cs" Line="1" Column="1" />
-      <File FileName="Program.cs" Line="30" Column="42" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,22 +13,24 @@
               <Node name="Models" expanded="True" />
               <Node name="Pages" expanded="True">
                 <Node name="Collections" expanded="True">
-                  <Node name="Index.cshtml" expanded="True" />
+                  <Node name="Create.cshtml" expanded="True" />
+                  <Node name="Details.cshtml" expanded="True" />
                 </Node>
-                <Node name="Shared" expanded="True" />
-                <Node name="Error.cshtml" expanded="True" />
               </Node>
-              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.BioBank PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.BioBank PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
 </Properties>
