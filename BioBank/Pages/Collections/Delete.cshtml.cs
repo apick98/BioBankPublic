@@ -7,38 +7,47 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BioBank.Data;
 using BioBank.Models;
+using Microsoft.Extensions.Logging;
 
 namespace BioBank.Pages.Collections
 {
     public class DeleteModel : PageModel
     {
         private readonly BioBank.Data.BioBankContext _context;
+        private readonly ILogger<DeleteModel> _logger;
 
-        public DeleteModel(BioBank.Data.BioBankContext context)
+        public DeleteModel(BioBank.Data.BioBankContext context,
+                           ILogger<DeleteModel> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         [BindProperty]
-        public Collection Collection { get; set; } = default!;
+        public Collection Collection { get; set; }
+        public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var collection = await _context.Collections.FirstOrDefaultAsync(m => m.ID == id);
+            Collection = await _context.Collections
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
 
-            if (collection == null)
+            if (Collection == null)
             {
                 return NotFound();
             }
-            else
+
+            if (saveChangesError.GetValueOrDefault())
             {
-                Collection = collection;
+                ErrorMessage = String.Format("Delete {ID} failed. Try again", id);
             }
+
             return Page();
         }
 
@@ -49,15 +58,26 @@ namespace BioBank.Pages.Collections
                 return NotFound();
             }
 
-            var collection = await _context.Collections.FindAsync(id);
-            if (collection != null)
+            var student = await _context.Collections.FindAsync(id);
+
+            if (student == null)
             {
-                Collection = collection;
-                _context.Collections.Remove(Collection);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
 
-            return RedirectToPage("./Index");
+            try
+            {
+                _context.Collections.Remove(student);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, ErrorMessage);
+
+                return RedirectToAction("./Delete",
+                                     new { id, saveChangesError = true });
+            }
         }
     }
 }
