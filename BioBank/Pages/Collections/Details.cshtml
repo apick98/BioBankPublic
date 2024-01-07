@@ -26,7 +26,6 @@
     </dl>
 </div>
 
-
 <div>
     <h4>Samples</h4>
     <hr />
@@ -37,13 +36,19 @@
         <thead>
             <tr>
                 <th>
-                    Donor Count
+                    <a asp-page="./Details" asp-route-id="@Model.Collection.ID" asp-route-sortOrder="@Model.DonorCountSort">
+                        Donor Count
+                    </a>
                 </th>
                 <th>
-                    Material Type
+                    <a asp-page="./Details" asp-route-id="@Model.Collection.ID" asp-route-sortOrder="@Model.MaterialTypeSort">
+                        Material Type
+                    </a>
                 </th>
                 <th>
-                    Last Updated
+                    <a asp-page="./Details" asp-route-id="@Model.Collection.ID" asp-route-sortOrder="@Model.LastUpdatedSort">
+                        Last Updated
+                    </a>
                 </th>
                 <th></th>
             </tr>

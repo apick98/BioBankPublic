@@ -20,9 +20,18 @@ namespace BioBank.Pages.Collections
         }
 
         public Collection Collection { get; set; } = default!;
+        public string DonorCountSort { get; set; }
+        public string MaterialTypeSort { get; set; }
+        public string LastUpdatedSort { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string sortOrder, int? id)
         {
+            DonorCountSort = String.IsNullOrEmpty(sortOrder) ? "donorCount_desc" : "";
+            MaterialTypeSort = sortOrder == "MaterialType" ? "materialType_desc" : "MaterialType";
+            LastUpdatedSort = sortOrder == "LastUpdated" ? "lastUpdated_desc" : "LastUpdated";
+
+            
+
             if (id == null)
             {
                 return NotFound();
@@ -40,6 +49,29 @@ namespace BioBank.Pages.Collections
             else
             {
                 Collection = collection;
+            }
+
+            switch (sortOrder)
+            {
+                case "donorCount_desc":
+                    Collection.Samples = Collection.Samples.OrderByDescending(s => s.DonorCount).ToList();
+                    break;
+                case "MaterialType":
+                    Collection.Samples = Collection.Samples.OrderBy(s => s.MaterialType).ToList();
+                    break;
+                case "materialType_desc":
+                    Collection.Samples = Collection.Samples.OrderByDescending(s => s.MaterialType).ToList();
+                    break;
+                case "LastUpdated":
+                    Collection.Samples = Collection.Samples.OrderBy(s => s.LastUpdated).ToList();
+                    break;
+                case "lastUpdated_desc":
+                    Collection.Samples = Collection.Samples.OrderByDescending(s => s.LastUpdated).ToList();
+                    break;
+                default:
+                    // Default sorting
+                    Collection.Samples = Collection.Samples.OrderBy(s => s.DonorCount).ToList();
+                    break;
             }
             return Page();
         }

@@ -27,7 +27,6 @@ namespace BioBank.Pages.Samples
         [BindProperty(SupportsGet = true)] 
         public int CollectionID { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
