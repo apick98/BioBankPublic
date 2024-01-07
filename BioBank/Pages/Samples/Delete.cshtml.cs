@@ -41,6 +41,7 @@ namespace BioBank.Pages.Samples
             else
             {
                 Sample = sample;
+                CollectionID = Sample.CollectionID;
             }
             return Page();
         }
