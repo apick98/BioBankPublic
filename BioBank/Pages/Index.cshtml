@@ -4,7 +4,37 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .center-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        height: 80vh;
+    }
+
+    .centered-text {
+        margin-bottom: 20px;
+    }
+
+    .centered-image {
+        width: 500px;
+        margin-top: 20px;
+    }
+
+    .second-paragraph {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="center-content">
+    <div class="centered-text">
+        <h1 class="display-4">Welcome</h1>
+        <p>To begin viewing the collections and samples on file,</p>
+    </div>
+    <div>
+        <img src="https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg" alt="Medical Copyright Free Image" class="centered-image" />
+        <p class="second-paragraph">Click the 'Collections' button at the top of the page</p>
+    </div>
 </div>
