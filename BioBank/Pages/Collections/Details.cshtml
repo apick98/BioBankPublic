@@ -37,7 +37,8 @@
         <div class="form-actions no-color">
             <p>
                 Find by Material Type:
-                <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                <input type="text" name="searchString" value="@Model.CurrentFilter" />
+                <input type="hidden" name="id" value="@Model.Collection.ID" />
                 <input type="submit" value="Search" class="btn btn-primary" /> |
                 <a asp-page="/Collections/Details" asp-route-id="@Model.Collection.ID">Back to Collection Details</a>
             </p>

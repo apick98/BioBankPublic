@@ -25,8 +25,9 @@ namespace BioBank.Pages.Collections
         public string LastUpdatedSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
+        public IList<Sample> Samples {get; set;}
 
-        public async Task<IActionResult> OnGetAsync(string sortOrder, int? id, string searchString)
+        public async Task OnGetAsync(string sortOrder, int id, string searchString)
         {
             DonorCountSort = String.IsNullOrEmpty(sortOrder) ? "donorCount_desc" : "";
             MaterialTypeSort = sortOrder == "MaterialType" ? "materialType_desc" : "MaterialType";
@@ -34,54 +35,52 @@ namespace BioBank.Pages.Collections
 
             CurrentFilter = searchString;
 
-            if (id == null)
-            {
-                return NotFound();
-            }
 
             var collection = await _context.Collections
             .Include(s => s.Samples)
             .AsNoTracking()
             .FirstOrDefaultAsync(m => m.ID == id);
 
-            if (collection == null)
-            {
-                return NotFound();
-            }
-            else
+            if (collection != null)
             {
                 Collection = collection;
-            }
 
-            IQueryable<Sample> samplesIQ = collection.Samples.AsQueryable();
+                if (Collection.Samples == null)
+                {
+                    Collection.Samples = new List<Sample>();
+                }
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                samplesIQ = samplesIQ.Where(s => s.MaterialType.Contains(searchString));
-            }
+                IQueryable<Sample> samplesIQ = _context.Samples.Where(s => s.CollectionID == id);
 
-            switch (sortOrder)
-            {
-                case "donorCount_desc":
-                    samplesIQ = samplesIQ.OrderByDescending(s => s.DonorCount);
-                    break;
-                case "MaterialType":
-                    samplesIQ = samplesIQ.OrderBy(s => s.MaterialType);
-                    break;
-                case "materialType_desc":
-                    samplesIQ = samplesIQ.OrderByDescending(s => s.MaterialType);
-                    break;
-                case "LastUpdated":
-                    samplesIQ = samplesIQ.OrderBy(s => s.LastUpdated);
-                    break;
-                case "lastUpdated_desc":
-                    samplesIQ = samplesIQ.OrderByDescending(s => s.LastUpdated);
-                    break;
-                default:
-                    samplesIQ = samplesIQ.OrderBy(s => s.DonorCount);
-                    break;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    samplesIQ = samplesIQ.Where(s => s.MaterialType.ToUpper().Contains(searchString.ToUpper()));
+                }
+
+
+                switch (sortOrder)
+                {
+                    case "donorCount_desc":
+                        samplesIQ = samplesIQ.OrderByDescending(s => s.DonorCount);
+                        break;
+                    case "MaterialType":
+                        samplesIQ = samplesIQ.OrderBy(s => s.MaterialType);
+                        break;
+                    case "materialType_desc":
+                        samplesIQ = samplesIQ.OrderByDescending(s => s.MaterialType);
+                        break;
+                    case "LastUpdated":
+                        samplesIQ = samplesIQ.OrderBy(s => s.LastUpdated);
+                        break;
+                    case "lastUpdated_desc":
+                        samplesIQ = samplesIQ.OrderByDescending(s => s.LastUpdated);
+                        break;
+                    default:
+                        samplesIQ = samplesIQ.OrderBy(s => s.DonorCount);
+                        break;
+                }
+                Collection.Samples = await samplesIQ.AsNoTracking().ToListAsync();
             }
-            return Page();
         }
     }
 }
