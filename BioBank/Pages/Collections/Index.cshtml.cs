@@ -20,16 +20,26 @@ namespace BioBank.Pages.Collections
 
         public string DiseaseTermSort { get; set; }
         public string TitleSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
         public IList<Collection> Collections { get; set; }
 
-        public async Task OnGetAsync(string sortOrder)
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
             DiseaseTermSort = String.IsNullOrEmpty(sortOrder) ? "term_desc" : "";
             TitleSort = sortOrder == "Title" ? "title_desc" : "Title";
 
+            CurrentFilter = searchString;
+
             IQueryable<Collection> collectionsIQ = from s in _context.Collections
                                              select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                collectionsIQ = collectionsIQ.Where(s => s.DiseaseTerm.ToUpper().Contains(searchString.ToUpper())
+                                       || s.Title.ToUpper().Contains(searchString.ToUpper()));
+            }
 
             switch (sortOrder)
             {
