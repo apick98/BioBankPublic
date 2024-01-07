@@ -2,7 +2,7 @@
 @model BioBank.Pages.Collections.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Samples";
 }
 
 <h1>Details</h1>
@@ -49,17 +49,20 @@
         <thead>
             <tr>
                 <th>
-                    <a asp-page="./Details" asp-route-id="@Model.Collection.ID" asp-route-sortOrder="@Model.DonorCountSort">
+                    <a asp-page="./Details" asp-route-id="@Model.Collection.ID" asp-route-sortOrder="@Model.DonorCountSort"
+                       asp-route-currentFilter="@Model.CurrentFilter">
                         Donor Count
                     </a>
                 </th>
                 <th>
-                    <a asp-page="./Details" asp-route-id="@Model.Collection.ID" asp-route-sortOrder="@Model.MaterialTypeSort">
+                    <a asp-page="./Details" asp-route-id="@Model.Collection.ID" asp-route-sortOrder="@Model.MaterialTypeSort"
+                       asp-route-currentFilter="@Model.CurrentFilter">
                         Material Type
                     </a>
                 </th>
                 <th>
-                    <a asp-page="./Details" asp-route-id="@Model.Collection.ID" asp-route-sortOrder="@Model.LastUpdatedSort">
+                    <a asp-page="./Details" asp-route-id="@Model.Collection.ID" asp-route-sortOrder="@Model.LastUpdatedSort"
+                       asp-route-currentFilter="@Model.CurrentFilter">
                         Last Updated
                     </a>
                 </th>
@@ -67,7 +70,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Collection.Samples)
+            @foreach (var item in Model.Samples)
             {
                 <tr>
                     <td>
@@ -88,6 +91,27 @@
             }
         </tbody>
     </table>
+    @{
+        var prevDisabled = !Model.Samples.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.Samples.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-page="./Details"
+       asp-route-id="@Model.Collection.ID"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-pageIndex="@(Model.Samples.PageIndex - 1)"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       class="btn btn-primary @prevDisabled">
+        Previous
+    </a>
+    <a asp-page="./Details"
+       asp-route-id="@Model.Collection.ID"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-pageIndex="@(Model.Samples.PageIndex + 1)"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       class="btn btn-primary @nextDisabled">
+        Next
+    </a>
 </div>
 
 <div>

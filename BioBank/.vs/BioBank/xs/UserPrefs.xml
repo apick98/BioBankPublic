@@ -1,21 +1,25 @@
 ﻿<Properties StartupConfiguration="{BCA1DD4D-C10C-4C0E-830A-78C97A9D90A4}|https">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.BioBank PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Pages/Collections/Index.cshtml">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Pages/Collections/Details.cshtml">
     <Files>
-      <File FileName="Pages/Collections/Index.cshtml.cs" Line="22" Column="46" />
-      <File FileName="Pages/Collections/Index.cshtml" Line="2" Column="6" />
+      <File FileName="Pages/Collections/Details.cshtml" Line="99" Column="26" />
+      <File FileName="Pages/Collections/Details.cshtml.cs" Line="31" Column="22" />
+      <File FileName="PaginatedList.cs" Line="10" Column="15" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="BioBank">
             <Node name="BioBank">
-              <Node name="Models" expanded="True" />
               <Node name="Pages" expanded="True">
                 <Node name="Collections" expanded="True">
-                  <Node name="Delete.cshtml" expanded="True" />
+                  <Node name="Details.cshtml" expanded="True" selected="True" />
                   <Node name="Index.cshtml" expanded="True" />
                 </Node>
               </Node>
@@ -23,13 +27,6 @@
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

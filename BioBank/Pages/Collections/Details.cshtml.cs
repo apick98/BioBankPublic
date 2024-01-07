@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BioBank.Data;
 using BioBank.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace BioBank.Pages.Collections
 {
     public class DetailsModel : PageModel
     {
-        private readonly BioBank.Data.BioBankContext _context;
+        private readonly BioBankContext _context;
+        private readonly IConfiguration Configuration;
 
-        public DetailsModel(BioBank.Data.BioBankContext context)
+        public DetailsModel(BioBankContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
         public Collection Collection { get; set; } = default!;
@@ -25,13 +28,23 @@ namespace BioBank.Pages.Collections
         public string LastUpdatedSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
-        public IList<Sample> Samples {get; set;}
+        public PaginatedList<Sample> Samples {get; set;}
 
-        public async Task OnGetAsync(string sortOrder, int id, string searchString)
+        public async Task OnGetAsync(string sortOrder, int? id, string searchString, string currentFilter, int? pageIndex)
         {
+            CurrentSort = sortOrder;
             DonorCountSort = String.IsNullOrEmpty(sortOrder) ? "donorCount_desc" : "";
             MaterialTypeSort = sortOrder == "MaterialType" ? "materialType_desc" : "MaterialType";
             LastUpdatedSort = sortOrder == "LastUpdated" ? "lastUpdated_desc" : "LastUpdated";
+
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
             CurrentFilter = searchString;
 
@@ -79,7 +92,9 @@ namespace BioBank.Pages.Collections
                         samplesIQ = samplesIQ.OrderBy(s => s.DonorCount);
                         break;
                 }
-                Collection.Samples = await samplesIQ.AsNoTracking().ToListAsync();
+                var pageSize = Configuration.GetValue("PageSize", 4);
+                Samples = await PaginatedList<Sample>.CreateAsync(
+                    samplesIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
             }
         }
     }
