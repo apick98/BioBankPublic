@@ -58,16 +58,16 @@ namespace BioBank.Pages.Collections
                 return NotFound();
             }
 
-            var student = await _context.Collections.FindAsync(id);
+            var collection = await _context.Collections.FindAsync(id);
 
-            if (student == null)
+            if (collection == null)
             {
                 return NotFound();
             }
 
             try
             {
-                _context.Collections.Remove(student);
+                _context.Collections.Remove(collection);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }

@@ -7,15 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BioBank.Data;
 using BioBank.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace BioBank.Pages.Collections
 {
     public class IndexModel : PageModel
     {
         private readonly BioBankContext _context;
-        public IndexModel(BioBankContext context)
+        private readonly IConfiguration Configuration;
+
+        public IndexModel(BioBankContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
         public string DiseaseTermSort { get; set; }
@@ -23,12 +27,27 @@ namespace BioBank.Pages.Collections
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
-        public IList<Collection> Collections { get; set; }
+        public PaginatedList<Collection> Collections { get; set; }
 
-        public async Task OnGetAsync(string sortOrder, string searchString)
+        public async Task OnGetAsync(string sortOrder,
+            string currentFilter, string searchString, int? pageIndex)
         {
+            CurrentSort = sortOrder;
+
+
             DiseaseTermSort = String.IsNullOrEmpty(sortOrder) ? "term_desc" : "";
             TitleSort = sortOrder == "Title" ? "title_desc" : "Title";
+
+
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
 
             CurrentFilter = searchString;
 
@@ -57,7 +76,9 @@ namespace BioBank.Pages.Collections
                     break;
             }
 
-            Collections = await collectionsIQ.AsNoTracking().ToListAsync();
+            var pageSize = Configuration.GetValue("PageSize", 4);
+            Collections = await PaginatedList<Collection>.CreateAsync(
+                collectionsIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }
 }
