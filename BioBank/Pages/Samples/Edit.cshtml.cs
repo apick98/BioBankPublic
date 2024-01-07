@@ -23,6 +23,9 @@ namespace BioBank.Pages.Samples
         [BindProperty]
         public Sample Sample { get; set; } = default!;
 
+        [BindProperty(SupportsGet = true)]
+        public int CollectionID { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -35,7 +38,11 @@ namespace BioBank.Pages.Samples
             {
                 return NotFound();
             }
-            Sample = sample;
+            else
+            {
+                Sample = sample;
+                CollectionID = Sample.CollectionID;
+            }
             return Page();
         }
 
