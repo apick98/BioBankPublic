@@ -32,6 +32,18 @@
     <p>
         <a asp-page="/Samples/Create" asp-route-collectionId="@Model.Collection.ID">Create New Sample</a>
     </p>
+
+    <form asp-page="./Details" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by Material Type:
+                <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                <input type="submit" value="Search" class="btn btn-primary" /> |
+                <a asp-page="/Collections/Details" asp-route-id="@Model.Collection.ID">Back to Collection Details</a>
+            </p>
+        </div>
+    </form>
+
     <table class="table">
         <thead>
             <tr>

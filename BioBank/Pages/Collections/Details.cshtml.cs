@@ -23,14 +23,16 @@ namespace BioBank.Pages.Collections
         public string DonorCountSort { get; set; }
         public string MaterialTypeSort { get; set; }
         public string LastUpdatedSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string sortOrder, int? id)
+        public async Task<IActionResult> OnGetAsync(string sortOrder, int? id, string searchString)
         {
             DonorCountSort = String.IsNullOrEmpty(sortOrder) ? "donorCount_desc" : "";
             MaterialTypeSort = sortOrder == "MaterialType" ? "materialType_desc" : "MaterialType";
             LastUpdatedSort = sortOrder == "LastUpdated" ? "lastUpdated_desc" : "LastUpdated";
 
-            
+            CurrentFilter = searchString;
 
             if (id == null)
             {
@@ -51,26 +53,32 @@ namespace BioBank.Pages.Collections
                 Collection = collection;
             }
 
+            IQueryable<Sample> samplesIQ = collection.Samples.AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                samplesIQ = samplesIQ.Where(s => s.MaterialType.Contains(searchString));
+            }
+
             switch (sortOrder)
             {
                 case "donorCount_desc":
-                    Collection.Samples = Collection.Samples.OrderByDescending(s => s.DonorCount).ToList();
+                    samplesIQ = samplesIQ.OrderByDescending(s => s.DonorCount);
                     break;
                 case "MaterialType":
-                    Collection.Samples = Collection.Samples.OrderBy(s => s.MaterialType).ToList();
+                    samplesIQ = samplesIQ.OrderBy(s => s.MaterialType);
                     break;
                 case "materialType_desc":
-                    Collection.Samples = Collection.Samples.OrderByDescending(s => s.MaterialType).ToList();
+                    samplesIQ = samplesIQ.OrderByDescending(s => s.MaterialType);
                     break;
                 case "LastUpdated":
-                    Collection.Samples = Collection.Samples.OrderBy(s => s.LastUpdated).ToList();
+                    samplesIQ = samplesIQ.OrderBy(s => s.LastUpdated);
                     break;
                 case "lastUpdated_desc":
-                    Collection.Samples = Collection.Samples.OrderByDescending(s => s.LastUpdated).ToList();
+                    samplesIQ = samplesIQ.OrderByDescending(s => s.LastUpdated);
                     break;
                 default:
-                    // Default sorting
-                    Collection.Samples = Collection.Samples.OrderBy(s => s.DonorCount).ToList();
+                    samplesIQ = samplesIQ.OrderBy(s => s.DonorCount);
                     break;
             }
             return Page();
