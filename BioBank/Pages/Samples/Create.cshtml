@@ -1,0 +1,46 @@
+@page
+@model BioBank.Pages.Samples.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Sample</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CollectionID" /> <!-- Hidden input for CollectionID -->
+
+            <div class="form-group">
+                <label asp-for="Sample.DonorCount" class="control-label"></label>
+                <input asp-for="Sample.DonorCount" class="form-control" />
+                <span asp-validation-for="Sample.DonorCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sample.MaterialType" class="control-label"></label>
+                <input asp-for="Sample.MaterialType" class="form-control" />
+                <span asp-validation-for="Sample.MaterialType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sample.LastUpdated" class="control-label"></label>
+                <input asp-for="Sample.LastUpdated" class="form-control" />
+                <span asp-validation-for="Sample.LastUpdated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

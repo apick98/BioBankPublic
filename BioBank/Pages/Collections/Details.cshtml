@@ -23,31 +23,56 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Collection.Title)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Collection.Samples)
-        </dt>
-        <dd class="col-sm-10">
-            <table class="table">
-                <tr>
-                    <th>Donor Count</th>
-                    <th>Material Type</th>
-                </tr>
-                @foreach (var item in Model.Collection.Samples)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DonorCount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MaterialType)
-                        </td>
-                    </tr>
-                }
-            </table>
-        </dd>
     </dl>
 </div>
+
+
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Collection.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <h4>Samples</h4>
+    <hr />
+    <p>
+        <a asp-page="/Samples/Create" asp-route-collectionId="@Model.Collection.ID">Create New Sample</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Donor Count
+                </th>
+                <th>
+                    Material Type
+                </th>
+                <th>
+                    Last Updated
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Collection.Samples)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DonorCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaterialType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdated)
+                    </td>
+                    <td>
+                        <a asp-page="/Samples/Edit" asp-route-id="@item.SampleID">Edit</a> |
+                        <a asp-page="/Samples/Details" asp-route-id="@item.SampleID">Details</a> |
+                        <a asp-page="/Samples/Delete" asp-route-id="@item.SampleID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a asp-page="/Collections/Edit" asp-route-id="@Model.Collection.ID">Edit Collection</a> |
+    <a asp-page="/Collections/Index">Back to Collection List</a>
 </div>
