@@ -1,8 +1,5 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using BioBank.Data;
 using BioBank.Models;
 
@@ -52,7 +49,7 @@ namespace BioBank.Pages.Samples
                 return NotFound();
             }
 
-            if (await TryUpdateModelAsync<Sample>(
+            if (await TryUpdateModelAsync(
                 sampleToUpdate,
                 "sample",
                 s => s.DonorCount, s => s.MaterialType, s => s.LastUpdated))

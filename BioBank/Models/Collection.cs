@@ -1,5 +1,4 @@
-﻿using System;
-namespace BioBank.Models
+﻿namespace BioBank.Models
 {
     public class Collection
     {

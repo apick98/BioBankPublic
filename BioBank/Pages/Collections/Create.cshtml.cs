@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using BioBank.Data;
 using BioBank.Models;
 
 namespace BioBank.Pages.Collections
 {
     public class CreateModel : PageModel
     {
-        private readonly BioBank.Data.BioBankContext _context;
+        private readonly Data.BioBankContext _context;
 
-        public CreateModel(BioBank.Data.BioBankContext context)
+        public CreateModel(Data.BioBankContext context)
         {
             _context = context;
         }

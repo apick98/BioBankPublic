@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BioBank")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+64936c011f2c3ff3be8bc66cf7fd55ccac6dfeaf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c46a8a7070a901ce2eb8ae5b5ccffa4bdae1e74")]
 [assembly: System.Reflection.AssemblyProductAttribute("BioBank")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BioBank")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

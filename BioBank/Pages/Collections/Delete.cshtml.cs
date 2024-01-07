@@ -1,22 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using BioBank.Data;
 using BioBank.Models;
-using Microsoft.Extensions.Logging;
 
 namespace BioBank.Pages.Collections
 {
     public class DeleteModel : PageModel
     {
-        private readonly BioBank.Data.BioBankContext _context;
+        private readonly Data.BioBankContext _context;
         private readonly ILogger<DeleteModel> _logger;
 
-        public DeleteModel(BioBank.Data.BioBankContext context,
+        public DeleteModel(Data.BioBankContext context,
                            ILogger<DeleteModel> logger)
         {
             _context = context;

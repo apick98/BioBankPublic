@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using BioBank.Models;
+﻿using BioBank.Models;
 
 namespace BioBank.Data
 {
@@ -8,10 +6,10 @@ namespace BioBank.Data
     {
         public static void Initialise(BioBankContext context)
         {
-            // Look for any collections.
+            
             if (context.Collections.Any())
             {
-                return;   // DB has been seeded
+                return;
             }
 
             var collections = new Collection[]

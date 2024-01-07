@@ -1,21 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using BioBank.Data;
 using BioBank.Models;
 
 namespace BioBank.Pages.Collections
 {
     public class EditModel : PageModel
     {
-        private readonly BioBank.Data.BioBankContext _context;
+        private readonly Data.BioBankContext _context;
 
-        public EditModel(BioBank.Data.BioBankContext context)
+        public EditModel(Data.BioBankContext context)
         {
             _context = context;
         }
@@ -48,7 +41,7 @@ namespace BioBank.Pages.Collections
                 return NotFound();
             }
 
-            if (await TryUpdateModelAsync<Collection>(
+            if (await TryUpdateModelAsync(
                 collectionToUpdate,
                 "collection",
                 s => s.DiseaseTerm, s => s.Title))
@@ -58,11 +51,6 @@ namespace BioBank.Pages.Collections
             }
 
             return Page();
-        }
-
-        private bool CollectionExists(int id)
-        {
-            return _context.Collections.Any(e => e.ID == id);
         }
     }
 }
