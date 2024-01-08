@@ -1,7 +1,27 @@
 # BioBank - Technical Assessment Application
 -----------------------------------------------------------------------------------------------------------------
 ## Description
+This web application has been written as a ASP.NET Core Web App using the  .Net 8 SDK. Entity Framework packages were also required such as, SQLite (to act as the local database), the Microsoft.VisualStudio.Web.CodeGeneration.Design package (to generate the Create, Remove, Update and Delete (CRUD) web pages from the database context file) and SQLServer (in order to use the code generation package for the scaffolding of the CRUD pages). Additional frameworks such as Bootstrap and JQuery were already in present in the project files.
 
+The system created provides the following features:
+- Displaying the collections in a table (loading in from a local SQLite database)
+- Adding, editing and deleting collections from the database
+- Further displaying the details of a collection as well as the attributed samples
+- Displays the details of a sample
+- Adding, editing and deleting samples from the database (in addition to modifying the corresponding collection table through the relational database)
+- Sorting, filtering and pagination in both the collection and sample interface tables
+
+The main difficulty of this project was deciding on the technologies to use to build it. Initially, Blazor was chosen to create the application. However, the learning curve and lack of an appropriate tutorial meant considering alternatives.
+
+In future, improvements to the system could be the following:
+- Add authentication to the system to protect the data
+- Create a friendly and intuitive user interface (making it less clinical and more specific when given organisation themes and icons)
+- Allow users to change a sample's collection on the 'Edit' page (instead of deleting and re-adding) 
+- Store the data online for security
+- Integrate database migrations so when the model changes the database and schema can change without being dropped
+- Change the layering of the solution to a pattern such as MVC
+- Introduce concurrency to handle multiple users on the site
+- Possibly add 2-factor authentication
 -----------------------------------------------------------------------------------------------------------------
 ## How to Install and Run the Project
 
@@ -32,10 +52,6 @@
 - Press 'CTRL+C' within the terminal to close the local host when finished looking at the web app
 
 - (Alternative to using the terminal is opening via an IDE such as VSCode (packages will have to be installed through these))
-
------------------------------------------------------------------------------------------------------------------
-## How to Use the Project
-
 
 -----------------------------------------------------------------------------------------------------------------
 ## Acknowledgements
