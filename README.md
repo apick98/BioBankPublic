@@ -3,6 +3,8 @@
 ## Description
 This web application has been written as a ASP.NET Core Web App using the  .Net 8 SDK. Entity Framework packages were also required such as, SQLite (to act as the local database), the Microsoft.VisualStudio.Web.CodeGeneration.Design package (to generate the Create, Remove, Update and Delete (CRUD) web pages from the database context file) and SQLServer (in order to use the code generation package for the scaffolding of the CRUD pages). Additional frameworks such as Bootstrap and JQuery were already in present in the project files.
 
+The project is split up into sections. The 'Data' folder contains the context file (used to connect to the database) and an initialise file used to seed the database. 'Models' is a folder containing the models for a collection and sample for the context to configure  database entities. Within the 'Pages' folder, are the CRUD pages for Collections (in the 'Collections' folder' and the CRUD pages for Samples (in the 'Samples' folder). Finally, the 'Pages' folder also contains the index page (the initial page displayed), the shared page code with the page layout and navigation menu (within the 'Shared' folder). Outside of the 'Pages' folder in the project is the program file which sets up the program when initially run and the pagination file used to add pages to a table.
+
 The system created provides the following features:
 - Displaying the collections in a table (loading in from a local SQLite database)
 - Adding, editing and deleting collections from the database
@@ -23,7 +25,7 @@ In future, improvements to the system could be the following:
 - Introduce concurrency to handle multiple users on the site
 - Possibly add 2-factor authentication
 -----------------------------------------------------------------------------------------------------------------
-## How to Install and Run the Project
+## How to Install and Run the Project
 
 - Download a zip folder of the project via the repository page. (By clicking the 'Code' button then 'Download ZIP')
 
@@ -52,6 +54,21 @@ In future, improvements to the system could be the following:
 - Press 'CTRL+C' within the terminal to close the local host when finished looking at the web app
 
 - (Alternative to using the terminal is opening via an IDE such as VSCode (packages will have to be installed through these))
+-----------------------------------------------------------------------------------------------------------------
+## How to use the system
+
+- When run the 'Collections' button on the navigation menu at the top of the page must be clicked
+  
+- To create a collection, click 'Create New', fill out the form and click 'Create'
+- To edit a collection, click 'Edit' at the end of a collection's row, changed the form entries as required and click 'Save'
+- To delete a collection, click 'Delete' at the end of a collection's row, making sure to double-check before clicking 'Delete'
+- To view the data of a collection, click 'Details' at the end of a collection's row and this will show the details of a collection and the samples held
+
+- When within the 'Details' page of a collection:
+  - To create a sample, click 'Create New Sample', fill out the form and click 'Create'
+  - To edit a sample, click 'Edit' at the end of a sample's row, changed the form entries as required and click 'Save'
+  - To delete a sample, click 'Delete' at the end of a sample's row, making sure to double-check before clicking 'Delete'
+  - To view a sample's details, click 'Details' at the end of a sample's row
 
 -----------------------------------------------------------------------------------------------------------------
 ## Acknowledgements
